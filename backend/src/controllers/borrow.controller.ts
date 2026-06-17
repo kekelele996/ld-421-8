@@ -7,6 +7,10 @@ export const borrowController = {
   list(query: URLSearchParams) {
     return borrowService.list(query.get("status") ?? "");
   },
+  checkOverdue() {
+    const count = borrowService.overdueCheck();
+    return { overdueCount: count };
+  },
   create(user: User, body: Record<string, unknown>) {
     const record = borrowService.create(body);
     auditLogMiddleware(user, "SUBMIT_BORROW", "BorrowRecord", record.id);

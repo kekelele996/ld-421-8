@@ -68,7 +68,8 @@ export const equipment: Equipment[] = [
 export const borrowRecords: BorrowRecord[] = [
   { id: "br-001", equipmentId: "eq-hplc-01", borrowerId: "u-researcher", borrowedAt: "2026-06-01", expectedReturnAt: "2026-06-16", purpose: "药物代谢样品检测", status: BorrowStatus.Approved, approverId: "u-manager" },
   { id: "br-002", equipmentId: "eq-micro-02", borrowerId: "u-student", borrowedAt: "2026-06-10", expectedReturnAt: "2026-06-12", purpose: "细胞成像训练", status: BorrowStatus.Pending },
-  { id: "br-003", equipmentId: "eq-sterile-03", borrowerId: "u-student", borrowedAt: "2026-05-20", expectedReturnAt: "2026-05-22", actualReturnAt: "2026-05-23", purpose: "培养基灭菌", status: BorrowStatus.Returned, approverId: "u-manager", returnCondition: ReturnCondition.Good }
+  { id: "br-003", equipmentId: "eq-sterile-03", borrowerId: "u-student", borrowedAt: "2026-05-20", expectedReturnAt: "2026-05-22", actualReturnAt: "2026-05-23", purpose: "培养基灭菌", status: BorrowStatus.Returned, approverId: "u-manager", returnCondition: ReturnCondition.Good },
+  { id: "br-004", equipmentId: "eq-hplc-01", borrowerId: "u-student", borrowedAt: "2026-05-28", expectedReturnAt: "2026-06-05", purpose: "毕业设计样品分析", status: BorrowStatus.Approved, approverId: "u-manager" }
 ];
 
 export const maintenanceRecords: MaintenanceRecord[] = [

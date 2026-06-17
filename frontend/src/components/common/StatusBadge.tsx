@@ -8,7 +8,8 @@ const colorMap: Record<string, string> = {
   InUse: "blue",
   Maintenance: "orange",
   Rejected: "red",
-  Lost: "red"
+  Lost: "red",
+  Overdue: "volcano"
 };
 
 export function StatusBadge({ value }: { value: string }) {

@@ -5,10 +5,30 @@ import { ApiError } from "../utils/response.ts";
 
 export const borrowService = {
   list(status = "") {
+    this.overdueCheck();
     return status ? borrowRecords.filter((record) => record.status === status) : borrowRecords;
+  },
+  overdueCheck() {
+    const today = new Date().toISOString().slice(0, 10);
+    let count = 0;
+    for (const record of borrowRecords) {
+      if (record.status === BorrowStatus.Approved && record.expectedReturnAt < today) {
+        record.status = BorrowStatus.Overdue;
+        count++;
+      }
+    }
+    return count;
+  },
+  hasOverdueEquipment(equipmentId: string) {
+    return borrowRecords.some(
+      (record) => record.equipmentId === equipmentId && record.status === BorrowStatus.Overdue
+    );
   },
   create(input: Partial<BorrowRecord>) {
     if (!input.equipmentId) throw new ApiError(400, "EQUIPMENT_REQUIRED", "必须选择设备");
+    if (this.hasOverdueEquipment(input.equipmentId)) {
+      throw new ApiError(403, "EQUIPMENT_OVERDUE", "该设备存在逾期未归还记录，禁止再借");
+    }
     const record: BorrowRecord = {
       id: `br-${Date.now()}`,
       equipmentId: input.equipmentId,
